@@ -17,13 +17,35 @@ html, body {
   color:  rgb(255, 255, 255);
   padding-bottom: 30px;
 }
-.Container {
-  width: 600px;
-  height: 450px;
-  margin: auto;
+.ContainerWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.Container1 {
+  width: 580px;
+  height: 400px;
+  margin: 0 10px;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
-  padding: 20px;
+  padding: 0;
+}
+.Container2 {
+  width: 400px;
+  height: 400px;
+  margin: 0 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 0;
+}
+.smallTitle {
+  font-size: 16px;
+  font-weight: bold;
+  color:  rgb(11, 111, 199);
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgb(11, 111, 199);
 }
 .SelectWrapper {
   display: flex;
@@ -32,15 +54,27 @@ html, body {
   font-size: 16px;
   line-height: 16px;
   margin-right: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .SlectLabel {
   margin-right: 10px;
+  margin-bottom: 5px;
   font-weight: bold;
   text-align: right;
 }
-.Processor {
+.select {
   width: 200px;
+  height: 30px;
+  background-color: rgb(11, 111, 199);
+  border-radius: 3px;
+  color:rgb(255, 255, 255);
+  padding: 5px;
+  font-size: 16px;
+  outline: 0;
+  border: 0;
+}
+.selectCloud {
+  width: 280px;
   height: 30px;
   background-color: rgb(11, 111, 199);
   border-radius: 3px;
@@ -54,7 +88,35 @@ html, body {
   border: 0;
   font-size: 16px;
 }
+.parametersWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20px;
+}
+.parameters {
+  color:rgb(14, 165, 9);
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  padding: 5px;
+  border-bottom: 1px solid rgb(11, 111, 199);
+  border-left: 1px solid rgb(11, 111, 199);
+  border-bottom-left-radius: 5px;
+}
+.resultWrapper {
+  width: 1000px;
+  height: 100px;
+  margin: 20px auto;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
 .button {
+  height: 60px;
   background-color: rgb(23, 211, 16);
   padding: 10px 30px;
   border: 0;
@@ -64,6 +126,8 @@ html, body {
   font-weight: bold;
   cursor: pointer;
   outline: 0;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 .button:hover {
   background-color: rgb(14, 165, 9);
@@ -75,5 +139,4 @@ html, body {
   color:rgb(0, 0, 0);
   font-size: 16px;
   font-weight: bold;
-  margin-top: 20px;
 }
