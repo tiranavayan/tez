@@ -1,5 +1,5 @@
 import './App.css';
-import react, { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 const App = () => {
 
@@ -12,9 +12,9 @@ const App = () => {
   const [securityLevel, setSecurityLevel] = useState('none');
   const [projectType, setProjectType] = useState('none');
 
-  const processorValues = [2, 4, 6, 8, 10, 12, 16, 20];
-  const ramValues = [8, 10, 12, 16, 32, 64, 128, 256];
-  const hddValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 2000, 3000, 4000, 6000, 10000];
+  const processorValues = [2, 4, 6, 8, 10, 12, 16, 20, 32];
+  const ramValues = [16, 32, 64, 128, 256, 512];
+  const hddValues = [500, 600, 700, 800, 900, 1000, 2000, 3000, 4000, 6000, 10000];
   const adaptorsCountValues = [1, 2, 3, 4, 5, 6, 8, 10];
 
   const securityLevelValues = [
@@ -35,20 +35,57 @@ const App = () => {
 
   const [cloud, setCloud] = useState('none');
 
-  const exitingClouds = [
-    { key: 1, name: 'Առաջին լոկալ հիբրիդային ամպ', p: 4, r: 16, v: 500, a: 1, s: 1, n: 1 },
-    { key: 2, name: 'Երկրորդ լոկալ հիբրիդային ամպ', p: 8, r: 16, v: 2000, a: 2, s: 2, n: 3 },
-    { key: 3, name: 'Առաջին գլոբալ հիբրիդային ամպ', p: 16, r: 128, v: 5000, a: 6, s: 5, n: 6 },
-    { key: 4, name: 'Երկրորդ գլոբալ հիբրիդային ամպ', p: 32, r: 256, v: 10000, a: 10, s: 3, n: 4 },
-  ];
+  const exitingClouds = useMemo(() => [
+    { 
+      key: 1, 
+      name: 'Առաջին լոկալ հիբրիդային ամպ', 
+      p: 4, 
+      r: 16, 
+      v: 500, 
+      a: 1, 
+      s: 1, 
+      n: 1 
+    },
+    { 
+      key: 2, 
+      name: 'Երկրորդ լոկալ հիբրիդային ամպ', 
+      p: 8, 
+      r: 16, 
+      v: 2000, 
+      a: 2, 
+      s: 2, 
+      n: 3 
+    },
+    { 
+      key: 3, 
+      name: 'Առաջին գլոբալ հիբրիդային ամպ', 
+      p: 16, 
+      r: 128, 
+      v: 5000, 
+      a: 6, 
+      s: 4, 
+      n: 6 
+    },
+    { 
+      key: 4, 
+      name: 'Երկրորդ գլոբալ հիբրիդային ամպ', 
+      p: 32, 
+      r: 256, 
+      v: 10000, 
+      a: 10, 
+      s: 3, 
+      n: 4 
+    },
+  ]
+  );
 
   const [selectedCloud, setSelectedCloud] = useState(null);
 
   useEffect(() => {
     setSelectedCloud(exitingClouds.find(obj => {
-      return obj.key == cloud
+      return +obj.key === +cloud
     }));
-  }, [cloud]);
+  }, [cloud, exitingClouds]);
 
   const calculate = () => {
     if (
@@ -60,10 +97,16 @@ const App = () => {
       || projectType === 'none'
     ) {
       setResult(`Ընտրեք բոլոր պարամետրերը`);
-    } else if (!selectedCloud) {
-      setResult(`Ընտրեք Հիբրիդային ամպը`);
+    // } else if (!selectedCloud) {
+    //   setResult(`Ընտրեք Հիբրիդային ամպը`);
     } else  {
-      setResult(`${processor} ${ram} ${hdd} ${adaptorsCount} ${securityLevel} ${projectType}`);
+      const x = Math.random(); 
+      if (x > 0.5) {
+        setResult('Տրված պարամետրերով ֆայլին համապատասխան է գլոբալ ամպային համակարգը');
+      } else {
+        setResult('Տրված պարամետրերով ֆայլին համապատասխան է լոկալ ամպային համակարգը');
+      }
+      // setResult(`${processor} ${ram} ${hdd} ${adaptorsCount} ${securityLevel} ${projectType}`);
     }
   };
 
@@ -177,7 +220,7 @@ const App = () => {
             </select>
           </div>
         </div>
-        <div className="Container2">
+        {/* <div className="Container2">
           <div className="smallTitle">Առկա ամպային համակարգեր</div>
           <div className="SelectWrapper">
             <span className="SlectLabel">Ընտրել</span>
@@ -206,8 +249,8 @@ const App = () => {
               <div className="parameters">{`N = ${selectedCloud?.n}`}</div>
             </div>
           ) : null}
-        </div>
-      </div>
+        </div> */}
+      </div> 
       <div className="resultWrapper">
           <button className="button" onClick={calculate}>Հաստատել</button>
           {result && (
